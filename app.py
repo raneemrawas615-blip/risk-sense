@@ -1,3 +1,6 @@
+
+Copy
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -425,7 +428,8 @@ def render_home():
     </div>
     """, unsafe_allow_html=True)
     st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-    c1, c2 = st.columns(2)
+    st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
+    _, c1, c2, _ = st.columns([0.5, 2, 2, 0.5])
     with c1:
         if st.button(t["btn_assess"], key="ga"):
             st.session_state.page="assess"; st.rerun()
@@ -592,4 +596,3 @@ p = st.session_state.page
 if p=="home":   render_home()
 elif p=="assess": render_assess()
 elif p=="guide":  render_guide()
- 
