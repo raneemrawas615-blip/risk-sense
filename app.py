@@ -187,7 +187,7 @@ st.markdown(f"""
   .stNumberInput > label {{ color:#c4b5fd !important; font-weight:600; }}
   div[data-baseweb="select"] {{ background:#1a1a2e !important; border-color:#3a3a5a !important; }}
   .stButton > button {{
-    background: linear-gradient(135deg, #7c3aed, #2563eb) !important;
+    background: linear-gradient(135deg, #7c3aed, #2dd4bf) !important;
     color: white !important; border: none !important;
     border-radius: 12px !important; padding: 10px 32px !important;
     font-size: 1rem !important; font-weight: 700 !important;
