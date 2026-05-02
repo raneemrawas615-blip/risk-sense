@@ -33,12 +33,55 @@ html, body, [class*="css"] {{
   color: #ffffff !important;
   font-family: 'Inter','Cairo',sans-serif;
 }}
-.stApp {{ background-color: #0f0f1a !important; }}
+
+/* FULL PAGE BACKGROUND */
+.stApp {{
+  background-image: url('https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}}
+.stApp::before {{
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(8,4,18,0.80);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  z-index: 0;
+  pointer-events: none;
+}}
+.block-container {{
+  position: relative;
+  z-index: 1;
+}}
+
+/* DROPDOWN - DARK PURPLE */
+[data-baseweb="select"] > div {{
+  background-color: #1e0f4a !important;
+  border-color: #6d28d9 !important;
+  border-radius: 10px !important;
+}}
+[data-baseweb="select"] span,
+[data-baseweb="select"] div {{
+  color: #ddd6fe !important;
+  background-color: transparent !important;
+}}
+[data-baseweb="select"] svg {{
+  fill: #a78bfa !important;
+}}
+[data-baseweb="popover"] li {{
+  background: #1e0f4a !important;
+  color: #ddd6fe !important;
+}}
+[data-baseweb="popover"] li:hover {{
+  background: #2d1b69 !important;
+}}
 
 /* HOME HERO */
 .hero {{
   position: relative;
-  min-height: 82vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
