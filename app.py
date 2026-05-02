@@ -36,7 +36,7 @@ html, body, [class*="css"] {{
 
 /* FULL PAGE BACKGROUND */
 .stApp {{
-  background-image: url('https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png') !important;
+  background-image: url('https://github.com/user-attachments/assets/68126900-6b06-402c-84ee-46b7928a5a0f') !important;
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
