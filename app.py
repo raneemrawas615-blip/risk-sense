@@ -23,24 +23,16 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 # ─────────────────────────────────────────────
+# ─────────────────────────────────────────────
 # BACKGROUND IMAGE HELPER
 # ─────────────────────────────────────────────
-def get_base64_image(path):
-    try:
-        with open(path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    except:
-        return None
-
-BASE_DIR = os.path.dirname(__file__)
-BG_PATH  = os.path.join(BASE_DIR, "bg.png")
-bg_b64   = get_base64_image(BG_PATH)
-
+BG_URL = "https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png"
+bg_b64 = BG_URL
 # ─────────────────────────────────────────────
 # CSS
 # ─────────────────────────────────────────────
 bg_css = f"""
-background-image: url("data:image/png;base64,{bg_b64}");
+background-image: url("{bg_b64}")
 background-size: cover;
 background-position: center;
 """ if bg_b64 else "background: linear-gradient(135deg,#1a0533,#0f0f1a);"
