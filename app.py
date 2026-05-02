@@ -32,7 +32,7 @@ bg_b64 = BG_URL
 # CSS
 # ─────────────────────────────────────────────
 bg_css = f"""
-background-image: url("{bg_b64}")
+background-image: url("{bg_b64}");
 background-size: cover;
 background-position: center;
 """ if bg_b64 else "background: linear-gradient(135deg,#1a0533,#0f0f1a);"
