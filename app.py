@@ -33,22 +33,7 @@ html, body, [class*="css"] {{
   color: #ffffff !important;
   font-family: 'Inter','Cairo',sans-serif;
 }}
-.stApp {{
-  background-color: #0f0f1a;
-  background-image: {BG};
-  background-size: cover;
-  background-position: center;
-}}
-.stApp::before {{
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: rgba(10,5,20,0.82);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 0;
-}}
-.block-container {{ position: relative; z-index: 1; }}
+.stApp {{ background-color: #0f0f1a !important; }}
 
 /* HOME HERO */
 .hero {{
