@@ -506,18 +506,11 @@ def render_assess():
         ii=st.selectbox(t["q_inc"],t["inc_opts"]); iv=t["inc_opts"].index(ii)+1
         st.divider()
         st.markdown(f'<div class="card-title">{t["sec_body"]}</div>', unsafe_allow_html=True)
-        bm=st.radio(t["bmi_q"],[t["bmi_c"],t["bmi_e"],t["bmi_s"]],horizontal=True,key="bm")
-        bv=25.0
-        if bm==t["bmi_c"]:
-            c1,c2=st.columns(2)
-            with c1: hh=st.number_input(t["bmi_h"],100,250,170)
-            with c2: ww=st.number_input(t["bmi_w"],30,300,70)
-            bv=round(ww/((hh/100)**2),1)
-            st.markdown(f'<div style="color:#a78bfa;font-weight:700;">📊 {t["bmi_res"]}: {bv}</div>',unsafe_allow_html=True)
-        elif bm==t["bmi_e"]:
-            bv=st.number_input(t["bmi_lbl"],10.0,80.0,25.0,0.1,help=t["bmi_hint"])
-        else:
-            ci=st.selectbox(t["bmi_lbl"],t["bmi_cats"]); bv=t["bmi_vals"][t["bmi_cats"].index(ci)]
+        c1,c2=st.columns(2)
+        with c1: hh=st.number_input(t["bmi_h"],100,250,170)
+        with c2: ww=st.number_input(t["bmi_w"],30,300,70)
+        bv=round(ww/((hh/100)**2),1)
+        st.markdown(f'<div style="color:#2dd4bf;font-weight:700;font-size:1rem;">📊 {t["bmi_res"]}: {bv}</div>',unsafe_allow_html=True)
         c1,_=st.columns(2)
         with c1: gi=st.selectbox(t["q_gh"],t["gh_opts"]); gv=t["gh_opts"].index(gi)+1
         st.divider()
