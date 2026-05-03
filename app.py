@@ -1,16 +1,15 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
 import os
 import base64
- 
+
 st.set_page_config(page_title="Risk Sense | ريسك سينس", page_icon="🩺", layout="centered")
- 
+
 if "lang"  not in st.session_state: st.session_state.lang  = "en"
 if "page"  not in st.session_state: st.session_state.page  = "home"
- 
+
 # ── Background ────────────────────────────────
 def _b64(path):
     try:
@@ -18,23 +17,23 @@ def _b64(path):
             return base64.b64encode(f.read()).decode()
     except:
         return None
- 
+
 _bg = _b64(os.path.join(os.path.dirname(__file__), "bg.png"))
 BG  = f"url('data:image/png;base64,{_bg}')" if _bg else \
       "linear-gradient(135deg,#2d0066 0%,#0f0f1a 100%)"
- 
+
 # ── CSS ──────────────────────────────────────
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
- 
+
 *, body, html {{ box-sizing: border-box; }}
 html, body, [class*="css"] {{
   background-color: #0f0f1a !important;
   color: #ffffff !important;
   font-family: 'Inter','Cairo',sans-serif;
 }}
- 
+
 .stApp {{
   background-color: #0a0414;
   background-image: {BG};
@@ -56,7 +55,7 @@ html, body, [class*="css"] {{
   position: relative;
   z-index: 1;
 }}
- 
+
 /* DROPDOWN */
 [data-baseweb="select"] > div,
 [data-baseweb="select"] > div > div {{
@@ -84,7 +83,7 @@ html, body, [class*="css"] {{
 [role="option"]:hover {{
   background: #2d1b69 !important;
 }}
- 
+
 /* HOME HERO */
 .hero {{
   position: relative;
@@ -136,7 +135,7 @@ html, body, [class*="css"] {{
   font-size: 0.75rem;
   margin-top: 12px;
 }}
- 
+
 /* BUTTONS */
 .stButton > button {{
   background: linear-gradient(135deg, #7c3aed, #2dd4bf) !important;
@@ -154,7 +153,7 @@ html, body, [class*="css"] {{
   font-size: 1.05rem !important; font-weight: 700 !important;
   width: 100%; margin-top: 16px;
 }}
- 
+
 /* FORM SUBMIT BUTTON - same style */  
 [data-testid="stFormSubmitButton"] > button {{
   background: linear-gradient(135deg, #7c3aed, #2dd4bf) !important;
@@ -163,7 +162,7 @@ html, body, [class*="css"] {{
   font-size: 1rem !important; font-weight: 700 !important;
   width: 100%; margin-top: 8px;
 }}
- 
+
 /* CARDS */
 .card {{
   background: #1a1a2e; border: 1px solid #2a2a4a;
@@ -174,7 +173,7 @@ html, body, [class*="css"] {{
   margin-bottom: 14px; padding-bottom: 8px;
   border-bottom: 1px solid #2a2a4a;
 }}
- 
+
 /* PAGE HEADER */
 .app-header {{ text-align: center; padding: 20px 16px 6px; }}
 .app-title {{
@@ -183,7 +182,7 @@ html, body, [class*="css"] {{
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }}
 .app-subtitle {{ color: #9ca3af; font-size: 0.82rem; margin-top: 4px; }}
- 
+
 /* DISCLAIMERS */
 .disc-purple {{
   background: #1e1a2e; border-left: 4px solid #7c3aed;
@@ -195,7 +194,7 @@ html, body, [class*="css"] {{
   border-radius: 8px; padding: 12px 16px;
   font-size: 0.85rem; color: #bae6fd; margin: 12px 0;
 }}
- 
+
 /* RISK */
 .risk-low  {{ background:#064e3b;color:#6ee7b7;border:1px solid #10b981;border-radius:12px;padding:6px 18px;font-weight:700; }}
 .risk-mod  {{ background:#78350f;color:#fcd34d;border:1px solid #f59e0b;border-radius:12px;padding:6px 18px;font-weight:700; }}
@@ -206,14 +205,14 @@ html, body, [class*="css"] {{
 .pbar-high {{ background:linear-gradient(90deg,#ef4444,#f87171);height:100%;border-radius:12px; }}
 .rec-item  {{ display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #2a2a4a;font-size:.95rem; }}
 .rec-item:last-child {{ border-bottom:none; }}
- 
+
 /* COMPARE TABLE */
 .ctable {{ width:100%;border-collapse:collapse;font-size:.88rem; }}
 .ctable th {{ background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;padding:10px 14px;text-align:right; }}
 .ctable td {{ padding:10px 14px;border-bottom:1px solid #2a2a4a;border:1px solid #3a2a5a;color:#ffffff; }}
 .ctable tr:hover td {{ background:#1e1e35; }}
 .ctable .feat {{ color:#a78bfa;font-weight:600; }}
- 
+
 /* LAB */
 .lcard {{ background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:16px;margin-bottom:12px; }}
 .lname {{ color:#c084fc;font-weight:700;font-size:1rem;margin-bottom:4px; }}
@@ -221,7 +220,7 @@ html, body, [class*="css"] {{
 .lbar  {{ background:#2a2a4a;border-radius:8px;overflow:hidden;height:15px;margin:4px 0; }}
 .lbar-f {{ background:linear-gradient(90deg,#a855f7,#c084fc);height:100%;border-radius:8px; }}
 .lbar-m {{ background:linear-gradient(90deg,#2dd4bf,#38bdf8);height:100%;border-radius:8px; }}
- 
+
 /* HIDE STREAMLIT HEADER & FOOTER */
 header[data-testid="stHeader"] {{
   display: none !important;
@@ -229,7 +228,7 @@ header[data-testid="stHeader"] {{
 footer {{ display: none !important; }}
 #MainMenu {{ display: none !important; }}
 .stDeployButton {{ display: none !important; }}
- 
+
 /* OVERRIDES */
 .stRadio > label, .stSlider > label,
 .stSelectbox > label, .stNumberInput > label {{ color:#c4b5fd !important;font-weight:600; }}
@@ -239,7 +238,7 @@ div[data-baseweb="select"] {{ background:#1a1a2e !important;border-color:#3a3a5a
   p, li, span, div {{ color:#ffffff; }}
 </style>
 """, unsafe_allow_html=True)
- 
+
 # ── Translations ──────────────────────────────
 T = {
 "en": {
@@ -375,7 +374,7 @@ T = {
   ],
 },
 }
- 
+
 # ── Model ─────────────────────────────────────
 @st.cache_resource
 def load_model():
@@ -385,13 +384,13 @@ def load_model():
     fn = joblib.load(os.path.join(base,"feature_names.pkl"))
     th = joblib.load(os.path.join(base,"threshold.pkl"))
     return m, p, fn, th
- 
+
 try:
     model, preprocessor, feature_names, threshold = load_model()
     model_ok = True
 except Exception as e:
     model_ok = False; _err = str(e)
- 
+
 def _bmi_cat(bmi):
     if bmi<20: return 'Underweight'
     elif bmi<25: return 'Normal weight'
@@ -399,9 +398,9 @@ def _bmi_cat(bmi):
     elif bmi<35: return 'Class I Obesity'
     elif bmi<40: return 'Class II Obesity'
     else: return 'Class III Obesity'
- 
+
 DROP = ['AnyHealthcare','NoDocbcCost','Sex','BMI_Category_Normal weight']
- 
+
 def predict(inp):
     import sklearn.compose._column_transformer as _ct
     if not hasattr(_ct,'_RemainderColsList'):
@@ -426,14 +425,14 @@ def predict(inp):
     df2=pd.DataFrame(proc,columns=nc+cc+pc)
     df2=df2.drop(columns=[f for f in DROP if f in df2.columns])
     return float(model.predict_proba(df2[feature_names])[0,1])
- 
+
 def yn(q,t,k):
     return 1 if st.radio(q,[t["yes"],t["no"]],horizontal=True,key=k)==t["yes"] else 0
- 
+
 def risk_cls(p):
     return "low" if p<0.40 else ("mod" if p<0.70 else "high")
- 
- 
+
+
 # ── HOME ──────────────────────────────────────
 def render_home():
     t = T[st.session_state.lang]
@@ -460,7 +459,7 @@ def render_home():
     with c2:
         if st.button(t["btn_guide"], key="gg"):
             st.session_state.page="guide"; st.rerun()
- 
+
 # ── ASSESS ────────────────────────────────────
 def render_assess():
     t = T[st.session_state.lang]
@@ -544,7 +543,7 @@ def render_assess():
         st.markdown(f'<div class="card">{html}</div>',unsafe_allow_html=True)
         if st.button(t["nut_btn"],key="gn"): st.session_state.page="guide"; st.rerun()
         st.markdown(f'<div class="disc-purple">{t["disc_main"]}</div>',unsafe_allow_html=True)
- 
+
 # ── GUIDE ─────────────────────────────────────
 def render_guide():
     t = T[st.session_state.lang]
@@ -557,32 +556,32 @@ def render_guide():
             st.rerun()
     if False: st.session_state.page="home"; st.rerun()
     st.markdown(f'<div class="app-header"><div class="app-title">📚 {t["guide_title"]}</div><div class="app-subtitle">{t["guide_sub"]}</div></div>',unsafe_allow_html=True)
- 
+
     with st.expander(t["g_about"]): st.markdown(t["about"])
- 
+
     with st.expander(t["g_diff"]):
         st.markdown(t["diff_intro"])
         h=t["diff_h"]; rows=t["diff_r"]
         st.markdown(f'<table class="ctable"><tr>{"".join(f"<th>{x}</th>" for x in h)}</tr>{"".join(f"""<tr><td class="feat">{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>""" for r in rows)}</table>',unsafe_allow_html=True)
- 
+
     with st.expander(t["g_same"]): st.markdown(t["same"])
- 
+
     with st.expander(t["g_symp"]):
         for s in t["symp_list"]: st.markdown(f"- {s}")
- 
+
     with st.expander(t["g_risk"]):
         for r in t["risk_list"]: st.markdown(f"- {r}")
- 
+
     with st.expander(t["g_comp"]):
         for nm,dc in t["comp_list"]: st.markdown(f"**{nm}** — {dc}")
- 
+
     with st.expander(t["g_prev"]):
         for p in t["prev_list"]: st.markdown(f"- {p}")
- 
+
     with st.expander(t["g_stats"]):
         for stat,desc in t["stats"]:
             st.markdown(f'<div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid #2a2a4a;align-items:center;"><div style="color:#c084fc;font-size:1.1rem;font-weight:800;min-width:150px;">{stat}</div><div style="color:#d1d5db;">{desc}</div></div>',unsafe_allow_html=True)
- 
+
     with st.expander(t["g_lab"]):
         st.markdown(f'<div class="disc-blue">{t["lab_intro"]}</div>',unsafe_allow_html=True)
         st.markdown(f"#### {t['lab_rank']}")
@@ -611,10 +610,10 @@ def render_guide():
               <div class="lbar"><div class="lbar-m" style="width:{x['mnd']}%;opacity:.4"></div></div>
             </div>""",unsafe_allow_html=True)
         st.markdown(f"<div style='color:#6b7280;font-size:.78rem;margin-top:6px;'>{t['lab_note']}</div>",unsafe_allow_html=True)
- 
+
     with st.expander(t["g_nut"]):
         st.markdown(f'<div class="disc-blue">🔜 {t["nut_soon"]}</div>',unsafe_allow_html=True)
- 
+
 # ── Router ────────────────────────────────────
 p = st.session_state.page
 if p=="home":   render_home()
