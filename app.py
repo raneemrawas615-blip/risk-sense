@@ -230,6 +230,26 @@ footer {{ display: none !important; }}
 .stDeployButton {{ display: none !important; }}
 
 /* OVERRIDES */
+/* GLOBAL ACCENT COLOR - override red to teal */
+:root {{
+  --primary: #2dd4bf !important;
+  --primary-color: #2dd4bf !important;
+}}
+[data-baseweb="radio"] [data-checked="true"] div {{
+  background: #2dd4bf !important;
+  border-color: #2dd4bf !important;
+  box-shadow: 0 0 0 3px rgba(45,212,191,0.3) !important;
+}}
+[data-baseweb="radio"] div:first-child {{
+  border-color: #2dd4bf !important;
+}}
+/* Slider accent */
+[data-testid="stSlider"] div[role="slider"] {{
+  background: #2dd4bf !important;
+}}
+[data-testid="stSlider"] > div > div > div {{
+  background: #2dd4bf !important;
+}}
 .stRadio > label, .stSlider > label,
 .stSelectbox > label, .stNumberInput > label {{ color:#c4b5fd !important;font-weight:600; }}
 div[data-baseweb="select"] {{ background:#1a1a2e !important;border-color:#3a3a5a !important; }}
