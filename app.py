@@ -201,6 +201,14 @@ html, body, [class*="css"] {{
 .lbar-f {{ background:linear-gradient(90deg,#a855f7,#c084fc);height:100%;border-radius:8px; }}
 .lbar-m {{ background:linear-gradient(90deg,#2dd4bf,#38bdf8);height:100%;border-radius:8px; }}
  
+/* HIDE STREAMLIT HEADER & FOOTER */
+header[data-testid="stHeader"] {{
+  display: none !important;
+}}
+footer {{ display: none !important; }}
+#MainMenu {{ display: none !important; }}
+.stDeployButton {{ display: none !important; }}
+ 
 /* OVERRIDES */
 .stRadio > label, .stSlider > label,
 .stSelectbox > label, .stNumberInput > label {{ color:#c4b5fd !important;font-weight:600; }}
