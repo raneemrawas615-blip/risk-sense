@@ -34,7 +34,27 @@ html, body, [class*="css"] {{
   font-family: 'Inter','Cairo',sans-serif;
 }}
  
-.stApp {{ background-color: #0a0414 !important; }}
+.stApp {{
+  background-color: #0a0414;
+  background-image: {BG};
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: none;
+}}
+.stApp::after {{
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(5,2,15,0.62);
+  z-index: 0;
+  pointer-events: none;
+}}
+.block-container {{
+  position: relative;
+  z-index: 1;
+}}
  
 /* DROPDOWN */
 [data-baseweb="select"] > div,
@@ -423,7 +443,6 @@ def render_home():
             st.rerun()
     st.markdown(f"""
     <div class="hero">
-      <div class="hero-bg"></div>
       <div class="hero-content">
         <div class="hero-title">🩺 {t['home_title']}</div>
         <div class="hero-sub">{t['home_sub']}</div>
