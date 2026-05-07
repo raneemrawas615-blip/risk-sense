@@ -112,7 +112,7 @@ NUT = {
 "ar": {
   "low": {
     "goal": "الهدف: الوقاية والحفاظ على نمط الحياة الصحي",
-    "source": "المصدر: الجمعية الملكية للتوعية الصحية — عيادة المجتمع الصحي | أخصائية التغذية: إسلام عزالدين جادالله — NutriPlus",
+    "source": "إسلام جادالله — NutriPlus",
     "note": "هذه توصيات عامة، قد يختلف الاحتياج الغذائي من شخص لآخر حسب حالته الصحية. إذا كنت مصاباً بأمراض مزمنة يرجى مراجعة طبيب مختص.",
     "cats": [
       ("🌾 الكربوهيدرات والنشويات", "ركّز على البرغل والشعير والشوفان وخبز القمح الكامل. أدخل البقوليات (عدس، حمص، فول) 3-4 مرات أسبوعياً. قلّل من الخبز الأبيض والسكريات المكررة. لا تتناول النشويات وحدها — ادمجها مع بروتين وألياف."),
@@ -126,7 +126,7 @@ NUT = {
   },
   "mod": {
     "goal": "الهدف: التعديل الغذائي المبكر وتصحيح العادات — توصيات للتدخل الوقائي",
-    "source": "المصدر: الجمعية الملكية للتوعية الصحية — عيادة المجتمع الصحي | أخصائية التغذية: إسلام عزالدين جادالله — NutriPlus",
+    "source": "إسلام جادالله — NutriPlus",
     "note": "هذه توصيات عامة، قد يختلف الاحتياج الغذائي من شخص لآخر حسب حالته الصحية. إذا كنت مصاباً بأمراض مزمنة يرجى مراجعة طبيب مختص.",
     "cats": [
       ("🌾 الكربوهيدرات والنشويات", "ركّز على البرغل والشعير والشوفان والبقوليات. وزّع الكربوهيدرات على الوجبات — لا دفعة واحدة. تجنّب: خبز أبيض، معجنات، حلويات، مشروبات محلاة. لا تتناول كربوهيدرات وحدها — دائماً مع بروتين وألياف."),
@@ -140,7 +140,7 @@ NUT = {
   },
   "high": {
     "goal": "الهدف: التدخل الغذائي الفوري — توصيات علاجية وقائية مكثفة",
-    "source": "المصدر: الجمعية الملكية للتوعية الصحية — عيادة المجتمع الصحي | أخصائية التغذية: إسلام عزالدين جادالله — NutriPlus",
+    "source": "إسلام جادالله — NutriPlus",
     "note": "هذه توصيات عامة، قد يختلف الاحتياج الغذائي من شخص لآخر حسب حالته الصحية. إذا كنت مصاباً بأمراض مزمنة يرجى مراجعة طبيب مختص وأخصائي تغذية للحصول على استشارة مناسبة لك.",
     "cats": [
       ("🌾 الكربوهيدرات والنشويات", "مسموح بتحكم دقيق: برغل، شعير، شوفان، عدس، حمص، فول، قمح كامل. البقوليات يومياً. تجنّب: أرز قصير الحبة، خبز أبيض، معجنات، مشروبات محلاة، حلويات. لا تتناول كربوهيدرات وحدها أبداً — دائماً مع بروتين وألياف ودهون صحية."),
@@ -156,7 +156,7 @@ NUT = {
 "en": {
   "low": {
     "goal": "Goal: Prevention & maintaining a healthy lifestyle",
-    "source": "Source: Royal Health Awareness Society — Community Health Clinic | Dietitian: Islam Azzedine Jadallah — NutriPlus",
+    "source": "Islam Jadallah — NutriPlus",
     "note": "These are general recommendations. Nutritional needs vary by individual health status. Consult a specialist if you have chronic conditions.",
     "cats": [
       ("🌾 Carbohydrates & Starches", "Focus on complex carbs: bulgur, barley, oats, whole wheat bread. Include legumes (lentils, chickpeas, fava beans) 3-4 times/week. Reduce white bread and refined sugars. Always combine starches with protein and fiber."),
@@ -170,7 +170,7 @@ NUT = {
   },
   "mod": {
     "goal": "Goal: Early dietary modification & correcting habits — preventive intervention",
-    "source": "Source: Royal Health Awareness Society — Community Health Clinic | Dietitian: Islam Azzedine Jadallah — NutriPlus",
+    "source": "Islam Jadallah — NutriPlus",
     "note": "These are general recommendations. Nutritional needs vary by individual health status. Consult a specialist if you have chronic conditions.",
     "cats": [
       ("🌾 Carbohydrates & Starches", "Focus on bulgur, barley, oats, and legumes. Distribute carbs across meals — not all at once. Avoid: white bread, pastries, sweets, sweetened drinks. Never eat carbs alone — always with protein and fiber."),
@@ -184,7 +184,7 @@ NUT = {
   },
   "high": {
     "goal": "Goal: Immediate dietary intervention — intensive therapeutic & preventive recommendations",
-    "source": "Source: Royal Health Awareness Society — Community Health Clinic | Dietitian: Islam Azzedine Jadallah — NutriPlus",
+    "source": "Islam Jadallah — NutriPlus",
     "note": "These are general recommendations. Nutritional needs vary by individual health status. Please consult a specialist and a dietitian for a personalized plan.",
     "cats": [
       ("🌾 Carbohydrates & Starches", "Allowed with precise control: bulgur, barley, oats, lentils, chickpeas, whole wheat. Legumes daily. Avoid: short-grain rice, white bread, pastries, sweetened drinks, sweets. Never eat carbs alone — always with protein, fiber and healthy fats."),
@@ -229,7 +229,7 @@ T = {
   "yes":"Yes","no":"No","submit":"Get My Risk Assessment",
   "res_title":"Your Risk Assessment","risk_lbl":"Risk Level","prob_lbl":"Predicted Probability","rec_title":"Key Recommendations",
   "nut_title":"🥗 Nutritional Recommendations",
-  "nut_src":"Source","nut_note_lbl":"⚠️ Note",
+  "nut_src":"Source","nut_note_lbl":"💙 Note",
   "low":"Low Risk","mod":"Moderate Risk","high":"High Risk",
   "rec_low":["✅ Your risk is low — keep your healthy habits.","🏃 Stay active — aim for 150 min/week.","🩺 Schedule regular annual check-ups.","💧 Stay hydrated and get quality sleep."],
   "rec_mod":["⚠️ Moderate risk — take action now.","🏃 Increase physical activity to 150 min/week.","📊 Monitor blood pressure and cholesterol.","🩺 Consult your doctor for a blood glucose test."],
@@ -291,7 +291,7 @@ T = {
   "yes":"نعم","no":"لا","submit":"احصل على تقييم الخطر",
   "res_title":"نتيجة تقييمك","risk_lbl":"مستوى الخطر","prob_lbl":"الاحتمالية المتوقعة","rec_title":"التوصيات الرئيسية",
   "nut_title":"🥗 التوصيات الغذائية",
-  "nut_src":"المصدر","nut_note_lbl":"⚠️ ملاحظة",
+  "nut_src":"المصدر","nut_note_lbl":"💙 ملاحظة",
   "low":"خطر منخفض","mod":"خطر متوسط","high":"خطر مرتفع",
   "rec_low":["✅ خطرك منخفض — استمر في عاداتك الصحية.","🏃 حافظ على النشاط البدني — 150 دقيقة أسبوعياً.","🩺 أجرِ فحوصات صحية دورية سنوية.","💧 اشرب كمية كافية من الماء واحرص على النوم الجيد."],
   "rec_mod":["⚠️ خطر متوسط — ابدأ باتخاذ إجراءات الآن.","🏃 زد نشاطك البدني إلى 150 دقيقة أسبوعياً.","📊 راقب ضغط دمك ومستوى الكوليسترول.","🩺 استشر طبيبك لإجراء فحص سكر الدم."],
@@ -431,17 +431,12 @@ def render_assess():
     if not model_ok:
         st.error("Model files not found."); return
  
-    # BMI calculator OUTSIDE form so it updates dynamically
     st.markdown(f'<div class="card-title">{t["sec_body"]}</div>', unsafe_allow_html=True)
     c1, c2 = st.columns(2)
     with c1:
-        hh = st.number_input(t["bmi_h"], min_value=100, max_value=250,
-                             value=st.session_state.height, key="ht_input")
-        st.session_state.height = hh
+        hh = st.number_input(t["bmi_h"], min_value=100, max_value=250, value=170)
     with c2:
-        ww = st.number_input(t["bmi_w"], min_value=30, max_value=300,
-                             value=st.session_state.weight, key="wt_input")
-        st.session_state.weight = ww
+        ww = st.number_input(t["bmi_w"], min_value=30, max_value=300, value=70)
     bv = round(ww / ((hh / 100) ** 2), 1)
     st.markdown(f'<div style="color:#2dd4bf;font-weight:700;font-size:1.1rem;margin-bottom:12px;">📊 {t["bmi_res"]}: {bv}</div>', unsafe_allow_html=True)
  
