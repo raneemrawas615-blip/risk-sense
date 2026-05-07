@@ -292,6 +292,12 @@ T = {
   "res_title":"نتيجة تقييمك","risk_lbl":"مستوى الخطر","prob_lbl":"الاحتمالية المتوقعة","rec_title":"التوصيات الرئيسية",
   "nut_title":"🥗 التوصيات الغذائية",
   "nut_src":"المصدر","nut_note_lbl":"💙 ملاحظة",
+  "jordan_title":"🇯🇴 ملاحظات خاصة بالمجتمع الأردني",
+  "jordan_items":[
+    ("🍵 أبرز المشكلات الغذائية الشائعة في المجتمع الأردني","الإفراط في الشاي المحلى بالسكر — شائع جداً في الثقافة الأردنية. الإفراط في تناول الأرز الأبيض والخبز الأبيض. قلة البقوليات رغم توافرها. سهولة توافر الأكل الجاهز والحلويات عبر تطبيقات الهاتف. الإفراط في الدهون الحيوانية والسمن في الطهي. تناول الحلويات التقليدية بكميات كبيرة في المناسبات. قلة الخضار في الوجبات الرئيسية."),
+    ("🕌 رمضان والمناسبات والضيافة","الإفطار: على تمرة أو اثنتين + ماء + شوربة منزلية، ثم انتظار 10 دقائق قبل الوجبة الرئيسية. نصف الطبق خضار وربعه نشويات وربعه بروتين. تجنب الإفراط في حلويات رمضان (قطايف، عوامة). المنسف: كميات صغيرة من اللحم بلا شحوم مع تقليل الجميد. الضيافة: يمكن تناول كميات صغيرة من الحلويات في المناسبات مع الاعتدال."),
+    ("🏃 دور النشاط البدني مع التغذية","150 دقيقة أسبوعياً من النشاط المعتدل (مشي، سباحة، ركوب دراجة) يُقلل الخطر بشكل ملحوظ. تمارين مقاومة 2-3 مرات أسبوعياً تُحسّن حساسية الأنسولين. تقليل الجلوس الطويل — المشي بعد الوجبات يُقلل ارتفاع السكر. مراقبة السكر قبل وبعد التمرين خصوصاً في مرحلة الخطر المرتفع."),
+  ],
   "low":"خطر منخفض","mod":"خطر متوسط","high":"خطر مرتفع",
   "rec_low":["✅ خطرك منخفض — استمر في عاداتك الصحية.","🏃 حافظ على النشاط البدني — 150 دقيقة أسبوعياً.","🩺 أجرِ فحوصات صحية دورية سنوية.","💧 اشرب كمية كافية من الماء واحرص على النوم الجيد."],
   "rec_mod":["⚠️ خطر متوسط — ابدأ باتخاذ إجراءات الآن.","🏃 زد نشاطك البدني إلى 150 دقيقة أسبوعياً.","📊 راقب ضغط دمك ومستوى الكوليسترول.","🩺 استشر طبيبك لإجراء فحص سكر الدم."],
@@ -391,6 +397,13 @@ def render_nut(r, lang):
     for cat, desc in nd["cats"]:
         st.markdown(f'<div class="nut-cat">{cat}</div><div class="nut-item">{desc}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="nut-note"><b>{t["nut_note_lbl"]}:</b> {nd["note"]}<br><small style="color:#5eead4">{t["nut_src"]}: {nd["source"]}</small></div></div>', unsafe_allow_html=True)
+ 
+def render_jordan(lang):
+    t = T[lang]
+    st.markdown(f"### {t['jordan_title']}")
+    for title, desc in t["jordan_items"]:
+        with st.expander(title):
+            st.markdown(desc)
  
 def render_home():
     t = T[st.session_state.lang]
@@ -524,6 +537,8 @@ def render_assess():
         # Nutritional recommendations specific to risk level
         render_nut(r, st.session_state.lang)
  
+        # Jordan community notes
+        render_jordan(st.session_state.lang)
         st.markdown(f'<div class="disc-purple">{t["disc_main"]}</div>', unsafe_allow_html=True)
  
 def render_guide():
@@ -582,6 +597,12 @@ def render_guide():
         render_nut("mod", st.session_state.lang)
         st.markdown("### 🔴 " + T[st.session_state.lang]["high"])
         render_nut("high", st.session_state.lang)
+ 
+    with st.expander(t["jordan_title"]):
+        for title, desc in t["jordan_items"]:
+            st.markdown(f"**{title}**")
+            st.markdown(desc)
+            st.divider()
  
 p = st.session_state.page
 if p=="home":    render_home()
