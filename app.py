@@ -3,15 +3,16 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
-
+ 
 st.set_page_config(page_title="Risk Sense | ريسك سينس", page_icon="🩺", layout="centered")
-
+ 
 if "lang"  not in st.session_state: st.session_state.lang  = "en"
 if "page"  not in st.session_state: st.session_state.page  = "home"
-
-
+if "height" not in st.session_state: st.session_state.height = 170
+if "weight" not in st.session_state: st.session_state.weight = 70
+ 
 BG = "url('https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png')"
-
+ 
 st.markdown(f"""
 <style>
 *, body, html {{ box-sizing: border-box; }}
@@ -19,18 +20,18 @@ html, body, [class*="css"] {{ background-color: #0f0f1a !important; color: #ffff
 .stApp {{ background-color: #0a0414; background-image: {BG}; background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }}
 .stApp::after {{ content: ''; position: fixed; inset: 0; background: rgba(5,2,15,0.62); z-index: 0; pointer-events: none; }}
 .block-container {{ position: relative; z-index: 1; }}
-
+ 
 [data-baseweb="select"] > div, [data-baseweb="select"] > div > div {{ background-color: #1e0f4a !important; border: 1px solid #6d28d9 !important; border-radius: 10px !important; color: #ddd6fe !important; }}
 [data-baseweb="select"] input, [data-baseweb="select"] span {{ color: #ddd6fe !important; }}
 [data-baseweb="select"] svg path {{ fill: #a78bfa !important; }}
 [role="listbox"], [data-baseweb="popover"] {{ background: #1e0f4a !important; border: 1px solid #6d28d9 !important; }}
 [role="option"] {{ background: #1e0f4a !important; color: #ddd6fe !important; }}
 [role="option"]:hover {{ background: #2d1b69 !important; }}
-
+ 
 input[type="number"] {{ background: #1e0f4a !important; color: #ddd6fe !important; border: 1px solid #6d28d9 !important; border-radius: 10px !important; }}
 [data-testid="stNumberInput"] button {{ background: #2d1b69 !important; color: #ddd6fe !important; border: none !important; }}
 [data-testid="stNumberInput"] {{ background: #1e0f4a !important; border: 1px solid #6d28d9 !important; border-radius: 10px !important; }}
-
+ 
 .hero {{ position: relative; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 24px 32px; border-radius: 20px; margin-bottom: 16px; }}
 .hero-bg {{ position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: {BG}; background-size: cover; background-position: center; background-repeat: no-repeat; filter: brightness(0.42); }}
 .hero-content {{ position: relative; z-index: 1; width: 100%; max-width: 680px; margin: 0 auto; }}
@@ -38,11 +39,11 @@ input[type="number"] {{ background: #1e0f4a !important; color: #ddd6fe !importan
 .hero-sub {{ color: #ffffff; font-size: 1.05rem; margin-bottom: 24px; font-weight: 500; }}
 .hero-disc {{ background: rgba(124,58,237,0.18); border: 1px solid rgba(167,139,250,0.45); border-radius: 14px; padding: 14px 22px; font-size: 0.9rem; color: #e9d5ff; margin-bottom: 16px; line-height: 1.6; }}
 .hero-source {{ color: rgba(255,255,255,0.35); font-size: 0.75rem; margin-top: 12px; }}
-
+ 
 .stButton > button {{ background: linear-gradient(135deg, #7c3aed, #2dd4bf) !important; color: #ffffff !important; border: none !important; border-radius: 12px !important; padding: 11px 28px !important; font-size: 1rem !important; font-weight: 700 !important; width: 100%; margin-top: 8px; letter-spacing: 0.02em; transition: opacity .2s; }}
 .stButton > button:hover {{ opacity: 0.88; }}
 [data-testid="stFormSubmitButton"] > button {{ background: linear-gradient(135deg, #7c3aed, #2dd4bf) !important; color: #ffffff !important; border: none !important; border-radius: 12px !important; padding: 11px 28px !important; font-size: 1rem !important; font-weight: 700 !important; width: 100%; margin-top: 8px; }}
-
+ 
 .card {{ background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 16px; padding: 22px; margin-bottom: 18px; }}
 .card-title {{ font-size: 1rem; font-weight: 700; color: #a78bfa; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #2a2a4a; }}
 .app-header {{ text-align: center; padding: 20px 16px 6px; }}
@@ -50,7 +51,7 @@ input[type="number"] {{ background: #1e0f4a !important; color: #ddd6fe !importan
 .app-subtitle {{ color: #9ca3af; font-size: 0.82rem; margin-top: 4px; }}
 .disc-purple {{ background: #1e1a2e; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; color: #9ca3af; margin: 12px 0; }}
 .disc-blue {{ background: rgba(56,189,248,.08); border-left: 4px solid #38bdf8; border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; color: #bae6fd; margin: 12px 0; }}
-
+ 
 .risk-low  {{ background:#064e3b;color:#6ee7b7;border:1px solid #10b981;border-radius:12px;padding:6px 18px;font-weight:700; }}
 .risk-mod  {{ background:#78350f;color:#fcd34d;border:1px solid #f59e0b;border-radius:12px;padding:6px 18px;font-weight:700; }}
 .risk-high {{ background:#7f1d1d;color:#fca5a5;border:1px solid #ef4444;border-radius:12px;padding:6px 18px;font-weight:700; }}
@@ -58,14 +59,14 @@ input[type="number"] {{ background: #1e0f4a !important; color: #ddd6fe !importan
 .pbar-low  {{ background:linear-gradient(90deg,#10b981,#34d399);height:100%;border-radius:12px; }}
 .pbar-mod  {{ background:linear-gradient(90deg,#f59e0b,#fbbf24);height:100%;border-radius:12px; }}
 .pbar-high {{ background:linear-gradient(90deg,#ef4444,#f87171);height:100%;border-radius:12px; }}
-
+ 
 .nut-section {{ background: #12102a; border: 1px solid #2a2a4a; border-radius: 14px; padding: 20px; margin: 12px 0; }}
 .nut-title {{ color: #2dd4bf; font-weight: 700; font-size: 1rem; margin-bottom: 8px; }}
 .nut-item {{ padding: 6px 0; border-bottom: 1px solid #1e1e3a; font-size: 0.9rem; color: #e0e0f0; }}
 .nut-item:last-child {{ border-bottom: none; }}
 .nut-cat {{ color: #a78bfa; font-weight: 600; font-size: 0.85rem; margin-top: 10px; margin-bottom: 4px; }}
 .nut-note {{ background: rgba(45,212,191,0.08); border-left: 3px solid #2dd4bf; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #99f6e4; margin-top: 12px; }}
-
+ 
 .rec-item  {{ display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #2a2a4a;font-size:.95rem; }}
 .rec-item:last-child {{ border-bottom:none; }}
 .ctable {{ width:100%;border-collapse:collapse;font-size:.88rem; }}
@@ -79,7 +80,7 @@ input[type="number"] {{ background: #1e0f4a !important; color: #ddd6fe !importan
 .lbar  {{ background:#2a2a4a;border-radius:8px;overflow:hidden;height:15px;margin:4px 0; }}
 .lbar-f {{ background:linear-gradient(90deg,#a855f7,#c084fc);height:100%;border-radius:8px; }}
 .lbar-m {{ background:linear-gradient(90deg,#2dd4bf,#38bdf8);height:100%;border-radius:8px; }}
-
+ 
 header[data-testid="stHeader"] {{ display: none !important; }}
 footer {{ display: none !important; }}
 #MainMenu {{ display: none !important; }}
@@ -95,7 +96,7 @@ footer {{ display: none !important; }}
 p, li, span {{ color:#ffffff; }}
 </style>
 """, unsafe_allow_html=True)
-
+ 
 # ── Nutritional Recommendations ───────────────
 NUT = {
 "ar": {
@@ -187,7 +188,7 @@ NUT = {
   }
 }
 }
-
+ 
 T = {
 "en": {
   "lang_btn":"🌐 عربي","back":"← Home",
@@ -326,7 +327,7 @@ T = {
   ],
 },
 }
-
+ 
 @st.cache_resource
 def load_model():
     base = os.path.dirname(__file__)
@@ -335,13 +336,13 @@ def load_model():
     fn = joblib.load(os.path.join(base,"feature_names.pkl"))
     th = joblib.load(os.path.join(base,"threshold.pkl"))
     return m, p, fn, th
-
+ 
 try:
     model, preprocessor, feature_names, threshold = load_model()
     model_ok = True
 except Exception as e:
     model_ok = False; _err = str(e)
-
+ 
 def _bmi_cat(bmi):
     if bmi<20: return 'Underweight'
     elif bmi<25: return 'Normal weight'
@@ -349,9 +350,9 @@ def _bmi_cat(bmi):
     elif bmi<35: return 'Class I Obesity'
     elif bmi<40: return 'Class II Obesity'
     else: return 'Class III Obesity'
-
+ 
 DROP = ['AnyHealthcare','NoDocbcCost','Sex','BMI_Category_Normal weight']
-
+ 
 def predict(inp):
     import sklearn.compose._column_transformer as _ct
     if not hasattr(_ct,'_RemainderColsList'):
@@ -376,14 +377,14 @@ def predict(inp):
     df2=pd.DataFrame(proc,columns=nc+cc+pc)
     df2=df2.drop(columns=[f for f in DROP if f in df2.columns])
     return float(model.predict_proba(df2[feature_names])[0,1])
-
+ 
 def yn(q, t, k):
     v = st.radio(q, [t["yes"], t["no"]], index=None, horizontal=True, key=k)
     return 1 if v == t["yes"] else (0 if v == t["no"] else None)
-
+ 
 def risk_cls(p):
     return "low" if p<0.40 else ("mod" if p<0.70 else "high")
-
+ 
 def render_nut(r, lang):
     t = T[lang]
     nd = NUT[lang][r]
@@ -392,14 +393,14 @@ def render_nut(r, lang):
     for cat, desc in nd["cats"]:
         st.markdown(f'<div class="nut-cat">{cat}</div><div class="nut-item">{desc}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="nut-note"><b>{t["nut_note_lbl"]}:</b> {nd["note"]}<br><small style="color:#5eead4">{t["nut_src"]}: {nd["source"]}</small></div></div>', unsafe_allow_html=True)
-
+ 
 def render_jordan(lang):
     t = T[lang]
     st.markdown(f"### {t['jordan_title']}")
     for title, desc in t["jordan_items"]:
         with st.expander(title):
             st.markdown(desc)
-
+ 
 def render_home():
     t = T[st.session_state.lang]
     _, cl = st.columns([8,2])
@@ -423,7 +424,7 @@ def render_home():
         if st.button(t["btn_assess"], key="ga"): st.session_state.page="assess"; st.rerun()
     with c2:
         if st.button(t["btn_guide"], key="gg"): st.session_state.page="guide"; st.rerun()
-
+ 
 def render_assess():
     t = T[st.session_state.lang]
     c_bk, _, c_lg = st.columns([2,6,2])
@@ -432,13 +433,13 @@ def render_assess():
     with c_lg:
         if st.button(t["lang_btn"], key="lang_a"):
             st.session_state.lang = "ar" if st.session_state.lang=="en" else "en"; st.rerun()
-
+ 
     st.markdown(f'<div class="app-header"><div class="app-title">🤖 {t["assess_title"]}</div><div class="app-subtitle">{t["assess_sub"]}</div></div>', unsafe_allow_html=True)
     st.markdown(f'<div class="disc-blue">{t["disc_main"]}</div>', unsafe_allow_html=True)
-
+ 
     if not model_ok:
         st.error("Model files not found."); return
-
+ 
     st.markdown(f'<div class="card-title">{t["sec_body"]}</div>', unsafe_allow_html=True)
     c1, c2 = st.columns(2)
     with c1:
@@ -447,7 +448,7 @@ def render_assess():
         ww = st.number_input(t["bmi_w"], min_value=30, max_value=300, value=70)
     bv = round(ww / ((hh / 100) ** 2), 1)
     st.markdown(f'<div style="color:#2dd4bf;font-weight:700;font-size:1.1rem;margin-bottom:12px;">📊 {t["bmi_res"]}: {bv}</div>', unsafe_allow_html=True)
-
+ 
     with st.form("rf"):
         st.markdown(f'<div class="card-title">{t["sec_demo"]}</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
@@ -459,13 +460,13 @@ def render_assess():
             ev = t["edu_opts"].index(ei)+1 if ei else 4
         ii = st.selectbox(t["q_inc"], t["inc_opts"], index=None, placeholder="—")
         iv = t["inc_opts"].index(ii)+1 if ii else 4
-
+ 
         st.divider()
         c1, _ = st.columns(2)
         with c1:
             gi = st.selectbox(t["q_gh"], t["gh_opts"], index=None, placeholder="—")
             gv = t["gh_opts"].index(gi)+1 if gi else 3
-
+ 
         st.divider()
         st.markdown(f'<div class="card-title">{t["sec_cond"]}</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
@@ -476,21 +477,21 @@ def render_assess():
             sk = yn(t["q_stroke"], t, "sk")
             ht = yn(t["q_heart"],  t, "ht")
             wk = yn(t["q_walk"],   t, "wk")
-
+ 
         st.divider()
         st.markdown(f'<div class="card-title">{t["sec_life"]}</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
         with c1: sm = yn(t["q_smoke"], t, "sm")
         with c2: pa = yn(t["q_phys"],  t, "pa")
-
+ 
         st.divider()
         st.markdown(f'<div class="card-title">{t["sec_days"]}</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
         with c1: mh = st.slider(t["q_ment"],  0, 30, 0)
         with c2: ph = st.slider(t["q_phys2"], 0, 30, 0)
-
+ 
         sub = st.form_submit_button(t["submit"])
-
+ 
     if sub:
         # Use defaults for unanswered radio buttons
         inp = {
@@ -507,13 +508,13 @@ def render_assess():
         with st.spinner("⏳"):
             try: prob = predict(inp)
             except Exception as e: st.error(f"Error: {e}"); return
-
+ 
         r = risk_cls(prob); pct = round(prob*100, 1)
         rl = {"low":t["low"],"mod":t["mod"],"high":t["high"]}
         rc = {"low":"risk-low","mod":"risk-mod","high":"risk-high"}
         bc = {"low":"pbar-low","mod":"pbar-mod","high":"pbar-high"}
         rk = {"low":"rec_low","mod":"rec_mod","high":"rec_high"}
-
+ 
         st.markdown("---")
         st.markdown(f"### 📊 {t['res_title']}")
         st.markdown(f"""
@@ -524,18 +525,18 @@ def render_assess():
         <div style="color:#9ca3af;font-size:.9rem;margin-bottom:6px;">{t['prob_lbl']}: <strong style="color:#fff">{pct}%</strong></div>
         <div class="pbar-bg"><div class="{bc[r]}" style="width:{pct}%"></div></div>
         """, unsafe_allow_html=True)
-
+ 
         st.markdown(f"### 💡 {t['rec_title']}")
         html = "".join([f'<div class="rec-item">{x}</div>' for x in t[rk[r]]])
         st.markdown(f'<div class="card">{html}</div>', unsafe_allow_html=True)
-
+ 
         # Nutritional recommendations specific to risk level
         render_nut(r, st.session_state.lang)
-
+ 
         # Jordan community notes
         render_jordan(st.session_state.lang)
         st.markdown(f'<div class="disc-purple">{t["disc_main"]}</div>', unsafe_allow_html=True)
-
+ 
 def render_guide():
     t = T[st.session_state.lang]
     c_bk, _, c_lg = st.columns([2,6,2])
@@ -544,9 +545,9 @@ def render_guide():
     with c_lg:
         if st.button(t["lang_btn"], key="lang_g"):
             st.session_state.lang = "ar" if st.session_state.lang=="en" else "en"; st.rerun()
-
+ 
     st.markdown(f'<div class="app-header"><div class="app-title">📚 {t["guide_title"]}</div><div class="app-subtitle">{t["guide_sub"]}</div></div>', unsafe_allow_html=True)
-
+ 
     with st.expander(t["g_about"]): st.markdown(t["about"])
     with st.expander(t["g_diff"]):
         st.markdown(t["diff_intro"])
@@ -584,7 +585,7 @@ def render_guide():
               <div class="lbar"><div class="lbar-m" style="width:{x['md']}%"></div></div>
               <div class="lbar"><div class="lbar-m" style="width:{x['mnd']}%;opacity:.4"></div></div></div>""", unsafe_allow_html=True)
         st.markdown(f"<div style='color:#6b7280;font-size:.78rem;margin-top:6px;'>{t['lab_note']}</div>", unsafe_allow_html=True)
-
+ 
     with st.expander(t["g_nut"]):
         st.markdown("### 🟢 " + T[st.session_state.lang]["low"])
         render_nut("low", st.session_state.lang)
@@ -592,13 +593,13 @@ def render_guide():
         render_nut("mod", st.session_state.lang)
         st.markdown("### 🔴 " + T[st.session_state.lang]["high"])
         render_nut("high", st.session_state.lang)
-
+ 
     with st.expander(t["jordan_title"]):
         for title, desc in t["jordan_items"]:
             st.markdown(f"**{title}**")
             st.markdown(desc)
             st.divider()
-
+ 
 p = st.session_state.page
 if p=="home":    render_home()
 elif p=="assess": render_assess()
