@@ -11,8 +11,7 @@ if "page"  not in st.session_state: st.session_state.page  = "home"
 if "height" not in st.session_state: st.session_state.height = 170
 if "weight" not in st.session_state: st.session_state.weight = 70
 
-from bg_data import BG_B64
-BG = f"url('data:image/png;base64,{BG_B64}')"
+BG = "url('https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png')"
 
 st.markdown(f"""
 <style>
