@@ -12,6 +12,7 @@ if "page"  not in st.session_state: st.session_state.page  = "home"
 if "height" not in st.session_state: st.session_state.height = 170
 if "weight" not in st.session_state: st.session_state.weight = 70
 
+@st.cache_data
 def _b64(path):
     try:
         with open(path, "rb") as f:
@@ -24,9 +25,8 @@ BG  = f"url('data:image/png;base64,{_bg}')" if _bg else "linear-gradient(135deg,
 
 st.markdown(f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
 *, body, html {{ box-sizing: border-box; }}
-html, body, [class*="css"] {{ background-color: #0f0f1a !important; color: #ffffff !important; font-family: 'Inter','Cairo',sans-serif; }}
+html, body, [class*="css"] {{ background-color: #0f0f1a !important; color: #ffffff !important; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }}
 .stApp {{ background-color: #0a0414; background-image: {BG}; background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; }}
 .stApp::after {{ content: ''; position: fixed; inset: 0; background: rgba(5,2,15,0.62); z-index: 0; pointer-events: none; }}
 .block-container {{ position: relative; z-index: 1; }}
