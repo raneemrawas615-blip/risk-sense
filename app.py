@@ -8,8 +8,7 @@ st.set_page_config(page_title="Risk Sense | ريسك سينس", page_icon="🩺"
 
 if "lang"  not in st.session_state: st.session_state.lang  = "en"
 if "page"  not in st.session_state: st.session_state.page  = "home"
-if "height" not in st.session_state: st.session_state.height = 170
-if "weight" not in st.session_state: st.session_state.weight = 70
+
 
 BG = "url('https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png')"
 
