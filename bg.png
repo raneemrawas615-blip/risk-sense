@@ -1,2 +1,1 @@
-from bg_data import BG_B64
-BG = f"url('data:image/png;base64,{BG_B64}')"
+
