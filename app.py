@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
-import base64
 
 st.set_page_config(page_title="Risk Sense | ريسك سينس", page_icon="🩺", layout="centered")
 
@@ -12,16 +11,7 @@ if "page"  not in st.session_state: st.session_state.page  = "home"
 if "height" not in st.session_state: st.session_state.height = 170
 if "weight" not in st.session_state: st.session_state.weight = 70
 
-@st.cache_data
-def _b64(path):
-    try:
-        with open(path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    except:
-        return None
-
-_bg = _b64(os.path.join(os.path.dirname(__file__), "bg.png"))
-BG  = f"url('data:image/png;base64,{_bg}')" if _bg else "linear-gradient(135deg,#2d0066 0%,#0f0f1a 100%)"
+BG = "url('https://raw.githubusercontent.com/raneemrawas615-blip/risk-sense/main/bg.png')"
 
 st.markdown(f"""
 <style>
